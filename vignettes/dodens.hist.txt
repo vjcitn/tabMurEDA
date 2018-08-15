@@ -1,0 +1,44 @@
+library(BiocStyle); render("tabMurEDA.Rmd")
+library(BiocStyle); render("tabMurEDA.Rmd")
+library(BiocStyle); render("tabMurEDA.Rmd")
+mur
+am = assay(mur)
+am
+binam = 1*(am!=0)
+binam
+colSums(binam[,1:20])
+tiss = unique(mur$tissue)
+tiss
+tiss = as.character(unique(mur$tissue))
+tiss
+tden = lapply(tiss, function(x) { inds = which(mur$tissue == x);
+  density( colSums(binam[,inds]) ); cat(x) })
+register()
+bpparam()
+register(SerialParam())
+tden = lapply(tiss, function(x) { inds = which(mur$tissue == x);
+  density( colSums(binam[,inds]) ); cat(x) })
+tden = lapply(tiss, function(x) { cat(x); inds = which(mur$tissue == x);
+  density( colSums(binam[,inds]) )})
+length(tiss)
+par(mfrow=c(6,2))
+lapply(tden, plot)
+par(mfrow=c(3,2), ask=TRUE)
+lapply(tden, plot)
+lapply(tden, plot, xlim=c(0,10000))
+lapply(seq_len(length(tiss)), function(x) plot(tden[[x]], xlim=c(0,10000),
+  main=tiss[x])
+)
+table(mur$tissue)
+library(rhdf5client)
+xx = H5S_source(URL_h5serv())
+xx
+groups(xx)
+links(xx,1)
+xx
+xx[["muris"]]
+ls()
+str(tden)
+dir()
+getwd()
+savehistory(file="dodens.hist.txt")

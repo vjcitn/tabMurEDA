@@ -1,0 +1,38 @@
+---
+title: "tabMurEDA -- EDA for Tabula Muris single cell expression data"
+author: "Vincent J. Carey, stvjc at channing.harvard.edu"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{tabMurEDA -- EDA for Tabula Muris single cell expression data}
+  %\VignetteEncoding{UTF-8}
+output:
+  BiocStyle::html_document:
+    highlight: pygments
+    number_sections: yes
+    theme: united
+    toc: yes
+---
+
+```{r setup, echo=FALSE, results="hide"}
+suppressPackageStartupMessages({
+library(BiocStyle)
+library(tabMurEDA)
+})
+```
+
+# Introduction
+
+The data were retrieved from the github repo noted in the
+man page for tabMurDelayed.
+
+# Basic description
+
+```{r lkd}
+library(tabMurEDA)
+mur = tabMurEDA::tabMurDelayed
+mur
+names(colData(mur))
+par(las=2, mar=c(12,4,2,2))
+barplot(table(mur$tissue))
+``` 
